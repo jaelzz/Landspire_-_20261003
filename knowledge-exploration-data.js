@@ -45,5 +45,24 @@
     unique(cases.flatMap(r=>r.types)).forEach(t=>{const refs=cases.filter(r=>r.types.includes(t)).map(r=>r.id);add('water:'+t,t,'水景类型',definitions[t]||'按当前登记口径记录的水景类型。',refs);link(m.id,'water:'+t,'案例采用',refs);});
     unique(cases.map(r=>r.spaceType)).forEach(t=>{const refs=cases.filter(r=>r.spaceType===t).map(r=>r.id);const n=add('space:'+t,t,'空间场景','已出现这一做法的案例场景。是否适用于新场地需结合条件判断。',refs);link(m.id,n.id,'案例场景',refs);});
   });
-  window.LandspireKnowledgeExploration={version:'0.4',concepts,edges,methods,definitions,scope:'基于三项目方案与专业口述的候选知识；未形成通用有效性结论。'};
+  // Commercial organization dimension: independent from design specialty, derived from project classification.
+  const orgTypes=unique(base.projects.map(p=>p.organization).filter(Boolean));
+  orgTypes.forEach(org=>{
+    const refs=records.filter(r=>{const proj=base.projects.find(p=>p.name===r.project);return proj&&proj.organization===org;}).map(r=>r.id);
+    add('org:'+org,org,'商业组织形式','项目的商业组织形式分类，与水景类型、空间场景等设计维度相互独立，用于对照不同业态下的问题与做法差异。',refs);
+  });
+  // Generic spatial interface dimension: cross-project界面概念，区别于具体项目里的空间命名。
+  const interfaceDefs={
+    '外部空间':'项目红线外或与城市公共空间直接相邻的开放场地；当前案例尚未按此口径单独标注。',
+    '沿接界面':'建筑／商业边界与公共通行空间之间的过渡界面；当前案例尚未按此口径单独标注。',
+    '消极界面':'人流到达度低、缺少主动使用功能的边界空间；当前案例尚未按此口径单独标注。'
+  };
+  Object.entries(interfaceDefs).forEach(([name,desc])=>{add('space:'+name,name,'空间场景',desc,[]).interfaceGroup=true;});
+  const activeInterface=concepts.find(n=>n.id==='space:积极界面');
+  if(activeInterface)activeInterface.interfaceGroup=true;
+  // Overview entry point aggregating the six top-level dimensions, used as the default landing focus.
+  const overviewRefs=unique(records.filter(r=>r.hasWater).map(r=>r.id));
+  add('overview','总览','总览','从商业组织形式、场地问题出发，浏览已沉淀的水景类型、空间场景、设计目标与设计做法；点击任一入口继续下钻，所有推导关系仍标注“案例提炼 · 待专业确认”。',overviewRefs);
+  unique([...orgTypes.map(o=>'org:'+o),'water:镜面水','space:主入口空间','problem:入口识别不足','goal:氛围营造','method:paired']).forEach(id=>{const target=concepts.find(n=>n.id===id);if(target)link('overview',id,'总览入口',target.refs.length?target.refs:overviewRefs);});
+  window.LandspireKnowledgeExploration={version:'0.5',concepts,edges,methods,definitions,scope:'基于三项目方案与专业口述的候选知识；未形成通用有效性结论。'};
 })();
