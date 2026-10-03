@@ -14,5 +14,4 @@ http.createServer((req,res)=>{
     if(!types[ext]){res.writeHead(404);res.end();return;}
     fs.readFile(target,(error,data)=>{res.writeHead(error?404:200,{'Content-Type':types[ext],'Cache-Control':'no-store'});res.end(error?'Not found':data);});
   } catch {res.writeHead(400);res.end('Bad request');}
-const port=Number(process.env.PORT)||3000;
 }).listen(port,()=>console.log(`Landspire preview: http://localhost:${port}`));
