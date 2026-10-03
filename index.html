@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="personal-workspace.css" />
   <link rel="stylesheet" href="design-workspace.css" />
+  <link rel="stylesheet" href="design-copilot.css" />
   <link rel="stylesheet" href="project-center.css" />
   <link rel="stylesheet" href="project-collaboration.css" />
   <link rel="stylesheet" href="knowledge-center.css" />
@@ -40,6 +41,7 @@
       <div class="nav-label" id="design-nav-label">设计工作台</div>
       <nav class="nav-group" id="design-nav">
         <button class="nav-item active" data-page="assistant"><span class="nav-icon">◈</span>设计助手</button>
+        <button class="nav-item" data-page="assistant-v2"><span class="nav-icon">✳</span>设计助手 · 新版<span class="nav-dot"></span></button>
         <button class="nav-item" data-page="projects"><span class="nav-icon">▦</span>项目工作台</button>
         <button class="nav-item" data-page="knowledge"><span class="nav-icon">⌕</span>知识库</button>
         <button class="nav-item" data-page="my-nominations"><span class="nav-icon">◇</span>我的知识提名</button>
@@ -61,7 +63,7 @@
     <main class="main-area"><header class="topbar"><div class="breadcrumbs"><span id="crumb-workspace">设计工作台</span><i>/</i><b id="crumb-current">设计助手</b></div><div class="top-actions"><span class="role-badge" id="role-badge">景观设计师</span><button class="icon-button" aria-label="帮助">?</button><button class="icon-button notification" aria-label="通知">♧<i></i></button><div class="top-avatar" id="top-avatar">林</div></div></header><div id="view" class="view"></div></main>
   </div>
   <div id="toast" class="toast" role="status"></div><div id="modal-root"></div>
-  <script src="app.js"></script><script src="assistant-home.js"></script><script src="auth-flow.js"></script><script src="personal-workspace.js"></script><script src="design-workspace.js"></script><script src="project-center.js"></script><script src="project-collaboration.js"></script>
+  <script src="app.js"></script><script src="assistant-home.js"></script><script src="auth-flow.js"></script><script src="personal-workspace.js"></script>  <script src="design-workspace.js"></script><script src="design-copilot.js"></script><script src="project-center.js"></script><script src="project-collaboration.js"></script>
   <script src="knowledge-samples-data.js"></script><script src="knowledge-model-core.js"></script><script src="knowledge-center.js"></script>
   <script src="knowledge-atlas-data.js"></script><script src="knowledge-atlas.js"></script>
   <script src="knowledge-exploration-data.js"></script><script src="knowledge-exploration.js"></script>
