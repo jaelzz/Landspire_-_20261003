@@ -1,0 +1,8 @@
+# Generated delivery packages and local verification artifacts.
+# Application source and runtime assets remain tracked.
+/outputs/
+/tmp/
+
+# Operating-system metadata.
+.DS_Store
+Thumbs.db
